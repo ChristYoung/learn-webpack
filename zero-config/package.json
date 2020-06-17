@@ -1,0 +1,20 @@
+{
+  "name": "zero-config",
+  "version": "1.0.0",
+  "description": "使用 webpack-cli 体验零配置打包",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "devEs": "webpack --mode development ./src/es/index.es.js",
+    "buildEs": "webpack --mode production ./src/es/index.es.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
