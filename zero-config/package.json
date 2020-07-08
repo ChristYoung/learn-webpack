@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "devEs": "webpack --mode development ./src/es/index.es.js --module-bind js=babel-loader",
-    "buildEs": "webpack --mode production ./src/es/index.es.js --module-bind js=babel-loader"
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
