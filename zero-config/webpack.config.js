@@ -1,5 +1,6 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -28,10 +29,11 @@ module.exports = {
     },
     plugins: [
         new webpack.ProgressPlugin(), // 在打包很慢的时候, 展示打包的进度条
+        new cleanWebpackPlugin.CleanWebpackPlugin(), // 使用cleanWebpackPlugin, 每次打包生成文件之前将上次构建的文件全部删除
         new htmlWebpackPlugin({
             filename: 'young.html',
             template: 'index.html',
             title: 'webpack is something awesome!!'
-        })
+        }),
     ],
 };
