@@ -12,3 +12,7 @@ html, body {
 ul,li {
     list-style: none;
 }
+
+.flex-div {
+    display: flex;
+}
