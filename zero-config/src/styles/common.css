@@ -1,3 +1,6 @@
+/* 对于使用 import引入进来的css, 会在生成的html页面上新增一个style*/
+@import './inputplaceholder.css';
+
 * {
     margin: 0;
     padding: 0;
@@ -13,10 +16,4 @@ html, body {
 
 ul,li {
     list-style: none;
-}
-
-input::placeholder {
-    color: red;
-    font-size: 14px;
-    font-style: italic;
 }
