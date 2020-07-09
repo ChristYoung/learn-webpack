@@ -17,6 +17,12 @@ module.exports = {
                 exclude: path.resolve(__dirname, './node_modules'), // 忽略打包node_modules中的js文件
                 include: path.resolve(__dirname, './src'), // 只打包src目录下的js文件
                 loader: 'babel-loader',
+            },
+            {
+                test: /\.css$/,
+                exclude: path.resolve(__dirname, './node_modules'),
+                include: path.resolve(__dirname, './src'),
+                loader: 'style-loader!css-loader', // 串联两个loader, style-loader会将css-loader编译的css插入到html文件的style标签中
             }
         ]
     },
