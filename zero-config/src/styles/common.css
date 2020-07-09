@@ -7,12 +7,16 @@ html, body {
     width: auto;
     height: 100%;
     background-color: red;
+    display: flex;
+
 }
 
 ul,li {
     list-style: none;
 }
 
-.flex-div {
-    display: flex;
+input::placeholder {
+    color: red;
+    font-size: 14px;
+    font-style: italic;
 }
