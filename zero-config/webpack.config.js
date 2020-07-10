@@ -26,7 +26,13 @@ module.exports = {
                 include: path.resolve(__dirname, './src'),
                 loader: 'style-loader!css-loader!postcss-loader', // 串联两个loader, style-loader会将css-loader编译的css插入到html文件的style标签中, 和使用loaders数组相当
                 // 备注: loader的处理方式是从右到左, 也就是先处理最右边的loader最后处理最左边的loader
-            }
+            },
+            {
+                test: /\.less$/,
+                exclude: path.resolve(__dirname, './node_modules'),
+                include: path.resolve(__dirname, './src'),
+                loader: 'style-loader!css-loader!postcss-loader!less-loader', // 注意: 先执行less-loader再执行postcss-loader
+            },
         ]
     },
     plugins: [
