@@ -11,7 +11,11 @@ html, body {
     height: 100%;
     background-color: red;
     display: flex;
+}
 
+body {
+    background: url('../assets/ljy.jpg') no-repeat;
+    background-size: auto;
 }
 
 ul,li {

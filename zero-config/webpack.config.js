@@ -33,6 +33,16 @@ module.exports = {
                 include: path.resolve(__dirname, './src'),
                 loader: 'style-loader!css-loader!postcss-loader!less-loader', // 注意: 先执行less-loader再执行postcss-loader
             },
+            {
+                test: /\.(png|jpg|gif|svg)$/i,
+                exclude: path.resolve(__dirname, './node_modules'),
+                include: path.resolve(__dirname, './src'),
+                loader: 'url-loader',
+                query: {
+                    limit: 2000000, // 设置文件最大值, 当要打包的文件小于指定最大值时, 会将文件打包成base64
+                    name: 'assets/[name]-[hash:5].[ext]'
+                }
+            },
         ]
     },
     plugins: [
