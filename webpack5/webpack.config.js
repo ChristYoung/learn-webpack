@@ -2,7 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
-const { resolve } = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: ['babel-polyfill', './src/js/main2.js'], // 为了使用es6的新特性如: (Object.assign), 需要引入babel-polyfill, babel-polyfill必须在任何其他代码/依赖声明之前被调用.
@@ -23,13 +23,7 @@ module.exports = {
                 test: /\.css$/,
                 exclude: path.resolve(__dirname, './node_modules'),
                 include: path.resolve(__dirname, './src'),
-                use: ['style-loader', 'css-loader', 'postcss-loader'],
-            },
-            {
-                test: /\.less$/,
-                exclude: path.resolve(__dirname, './node_modules'),
-                include: path.resolve(__dirname, './src'),
-                use: ['style-loader', 'css-loader', 'postcss-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'], // MiniCssExtractPlugin.loader将css文件提取到单独的css文件中, 而不是放在html的<style>标签中.
             },
             {
                 test: /\.(png|jpg|gif|svg)$/i,
@@ -51,12 +45,13 @@ module.exports = {
             template: 'index.html',
             title: 'webpack is something awesome!!'
         }),
+        new MiniCssExtractPlugin(),
     ],
 
     // 配置热更新的开发服务器: 自动编译, 自动打开和刷新浏览器.
     // 开发服务器模式下, 只会在内存中打包, 而不会有文件输出到dist目录, 类似于angular-cli的 ng serve.
     devServer: {
-        contentBase: resolve(__dirname, 'dist'),
+        contentBase: path.resolve(__dirname, 'dist'),
         compress: true,                                 // 开启gzip压缩.
         port: 3000,                                     // 指定本地启动的开发服务器的端口号.(启动后访问的地址是: localhost:3000/webpack5.html)
         open: true,                                     // 自动打开浏览器.
