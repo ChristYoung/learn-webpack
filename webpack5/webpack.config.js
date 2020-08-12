@@ -31,21 +31,23 @@ module.exports = {
                 include: path.resolve(__dirname, './src'),
                 loader: 'url-loader',
                 query: {
-                    limit: 2000000,                     // 设置文件最大值, 当要打包的文件小于指定最大值时, 会将文件打包成base64
-                    name: 'assets/[name]-[hash:5].[ext]'
+                    limit: 1024,                     // 设置文件最大值, 当要打包的文件小于指定最大值时, 会将文件打包成base64, 当大于指定值时会通过file-loader插件对图片文件进行打包, 因此也需要安装下file-loader.
+                    name: 'assets/img/[name]-[hash:5].[ext]'
                 }
             },
         ]
     },
     plugins: [
-        new webpack.ProgressPlugin(),                   // 在打包很慢的时候, 展示打包的进度条
-        new cleanWebpackPlugin.CleanWebpackPlugin(),    // 使用cleanWebpackPlugin, 每次打包生成文件之前将上次构建的文件全部删除
+        new webpack.ProgressPlugin(),                   // 在打包很慢的时候, 展示打包的进度条.
+        new cleanWebpackPlugin.CleanWebpackPlugin(),    // 使用cleanWebpackPlugin, 每次打包生成文件之前将上次构建的文件全部删除.
         new htmlWebpackPlugin({
             filename: 'webpack5.html',
             template: 'index.html',
             title: 'webpack is something awesome!!'
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'assets/styles/[name]-[hash:5].css' // 对输出的css文件进行重命名.  
+        }),
     ],
 
     // 配置热更新的开发服务器: 自动编译, 自动打开和刷新浏览器.
