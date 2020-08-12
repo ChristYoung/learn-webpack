@@ -6,7 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill', './src/js/main2.js'], // 为了使用es6的新特性如: (Object.assign), 需要引入babel-polyfill, babel-polyfill必须在任何其他代码/依赖声明之前被调用.
+    entry: {
+        main: './src/js/main2.js',
+    },
     output: {
         path: path.resolve(__dirname, './dist'),    // 打包后的输出路径, 使用Node中的Path模块, 执行为绝对路径
         filename: 'js/[name]-[chunkhash].js',       // 1. 多个chunk打包打包后的文件名称使用name和chunkhash占位符, name表示entry中的键值, chunkhash表示打包的hash
@@ -19,6 +21,25 @@ module.exports = {
                 exclude: path.resolve(__dirname, './node_modules'), // 忽略打包node_modules中的js文件
                 include: path.resolve(__dirname, './src'),          // 只打包src目录下的js文件
                 loader: 'babel-loader',
+                options: {
+                    presets: [
+                        [
+                            '@babel/preset-env',                        // 预设: 指示babse做怎么样的兼容处理.
+                            {
+                                useBuiltIns: 'usage',                   // 表示按需加载polyfill
+                                corejs: {                               // 安装使用core-js.
+                                    version: 3
+                                },
+                                targets: {                               //  指定js兼容性做到哪个版本的浏览器.
+                                    chrome: '60',
+                                    firefox: '60',
+                                    ie: '9',
+                                    edge: '17'
+                                }
+                            }
+                        ]
+                    ],
+                }
             },
             {
                 test: /\.css$/,
