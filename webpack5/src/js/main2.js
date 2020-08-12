@@ -1,6 +1,5 @@
-// 在webpack中任何类型的文件都可以当成是一个模块引入进来, 比如此处引入了一个css文件和less文件
-import '../styles/common.css';
-import '../styles/main.less';
+// 需要在入口顶部通过 import 将 polyfill 引入，以确保它能够最先加载.
+import 'babel-polyfill';
 
 const hello = () => console.log('hello~');
 
