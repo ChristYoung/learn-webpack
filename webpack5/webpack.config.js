@@ -24,14 +24,13 @@ module.exports = {
                 test: /\.css$/,
                 exclude: path.resolve(__dirname, './node_modules'),
                 include: path.resolve(__dirname, './src'),
-                loader: 'style-loader!css-loader!postcss-loader', // 串联两个loader, style-loader会将css-loader编译的css插入到html文件的style标签中, 和使用loaders数组相当
-                // 备注: loader的处理方式是从右到左, 也就是先处理最右边的loader最后处理最左边的loader
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.less$/,
                 exclude: path.resolve(__dirname, './node_modules'),
                 include: path.resolve(__dirname, './src'),
-                loader: 'style-loader!css-loader!postcss-loader!less-loader', // 注意: 先执行less-loader再执行postcss-loader
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.(png|jpg|gif|svg)$/i,
@@ -49,7 +48,7 @@ module.exports = {
         new webpack.ProgressPlugin(), // 在打包很慢的时候, 展示打包的进度条
         new cleanWebpackPlugin.CleanWebpackPlugin(), // 使用cleanWebpackPlugin, 每次打包生成文件之前将上次构建的文件全部删除
         new htmlWebpackPlugin({
-            filename: 'young.html',
+            filename: 'webpack5.html',
             template: 'index.html',
             title: 'webpack is something awesome!!'
         }),
