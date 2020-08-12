@@ -3,6 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     entry: ['babel-polyfill', './src/js/main2.js'], // 为了使用es6的新特性如: (Object.assign), 需要引入babel-polyfill, babel-polyfill必须在任何其他代码/依赖声明之前被调用.
@@ -23,15 +24,17 @@ module.exports = {
                 test: /\.css$/,
                 exclude: path.resolve(__dirname, './node_modules'),
                 include: path.resolve(__dirname, './src'),
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'], // MiniCssExtractPlugin.loader将css文件提取到单独的css文件中, 而不是放在html的<style>标签中.
+                // MiniCssExtractPlugin.loader将css文件提取到单独的css文件中, 而不是放在html的<style>标签中.
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.(png|jpg|gif|svg)$/i,
                 exclude: path.resolve(__dirname, './node_modules'),
                 include: path.resolve(__dirname, './src'),
                 loader: 'url-loader',
+                // 设置文件最大值, 当要打包的文件小于指定最大值时, 会将文件打包成base64, 当大于指定值时会通过file-loader插件对图片文件进行打包, 因此也需要安装下file-loader.
                 query: {
-                    limit: 1024,                     // 设置文件最大值, 当要打包的文件小于指定最大值时, 会将文件打包成base64, 当大于指定值时会通过file-loader插件对图片文件进行打包, 因此也需要安装下file-loader.
+                    limit: 1024,
                     name: 'assets/img/[name]-[hash:5].[ext]'
                 }
             },
@@ -48,6 +51,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'assets/styles/[name]-[hash:5].css' // 对输出的css文件进行重命名.  
         }),
+        new OptimizeCssWebpackPlugin(),                   // 压缩css.
     ],
 
     // 配置热更新的开发服务器: 自动编译, 自动打开和刷新浏览器.

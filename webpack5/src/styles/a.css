@@ -3,4 +3,5 @@
     height: 200px;
     background-color: deeppink;
     background-image: url('../assets/ljy.jpg');
+    display: flex;
 }
