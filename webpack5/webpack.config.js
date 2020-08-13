@@ -46,7 +46,13 @@ module.exports = {
                 exclude: path.resolve(__dirname, './node_modules'),
                 include: path.resolve(__dirname, './src'),
                 // MiniCssExtractPlugin.loader将css文件提取到单独的css文件中, 而不是放在html的<style>标签中.
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../../' // build出来后图片地址不显示, 应该需要配置下publicPath.
+                        },
+                    }, 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.(png|jpg|gif|svg)$/i,
