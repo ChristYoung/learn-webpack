@@ -11,7 +11,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),    // 打包后的输出路径, 使用Node中的Path模块, 执行为绝对路径
-        filename: 'js/[name]-[chunkhash].js',       // 1. 多个chunk打包打包后的文件名称使用name和chunkhash占位符, name表示entry中的键值, chunkhash表示打包的hash
+        filename: 'js/[name]-[hash].js',
     },
     // 以下是各种loader
     module: {
@@ -86,7 +86,8 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         compress: true,                                 // 开启gzip压缩.
-        port: 3000,                                     // 指定本地启动的开发服务器的端口号.(启动后访问的地址是: localhost:3000/webpack5.html)
+        port: 3000,                                     // 指定本地启动的开发服务器的端口号.(启动后访问的地址是: localhost:3000/webpack5.html).
         open: true,                                     // 自动打开浏览器.
+        hot: true,                                      // 表示开启HMR功能. 只对css文件的改动进行HMR(css文件天热支持HMR)      
     },
 };

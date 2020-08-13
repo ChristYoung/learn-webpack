@@ -5,6 +5,8 @@
 import '../styles/a.css';
 import '../styles/b.css';
 
+import '../js/a';
+
 const hello = () => console.log('hello~');
 
 const Main = () => {
