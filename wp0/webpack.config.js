@@ -39,6 +39,7 @@ module.exports = {
                             }
                         ]
                     ],
+                    cacheDirectory: true,                           // 开启babel缓存, 第二次构建时, 会读取之前的缓存, 从而打包速度会更快些.
                 }
             },
             {
@@ -90,4 +91,5 @@ module.exports = {
         open: true,                                     // 自动打开浏览器.
         hot: true,                                      // 表示开启HMR功能. 只对css文件的改动进行HMR(css文件天热支持HMR)      
     },
+    devtool: 'source-map',                              // 开启source-map的功能.
 };
