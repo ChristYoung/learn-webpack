@@ -2,13 +2,6 @@
 import '../styles/common.css';
 import '../styles/main.less';
 
-const hello = () => console.log('hello~');
-
-const Main = () => {
-    console.log('this is Main');
-    const s = Object.assign({}, new Date());
-    console.log('sss', s);
-};
-
-hello();
-Main();
+import bar, { foo } from './a';
+bar();
+foo();
